@@ -15,13 +15,13 @@ public class Book {
 	@Id
 	@GeneratedValue
 	private Long id;
-	
+
 	@NotBlank(message = "Please provide a name")
 	private String name;
-	
+
 	@NotBlank(message = "Please provide an author")
 	private String author;
-	
+
 	@NotNull(message = "Please provide a price")
 	@DecimalMin(value = "0.01")
 	private BigDecimal price;
@@ -80,36 +80,20 @@ public class Book {
 		return true;
 	}
 
-	public Long getId() {
-		return id;
-	}
+	public Long getId() { return id; }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+	public void setId(Long id) { this.id = id; }
 
-	public String getName() {
-		return name;
-	}
+	public String getName() { return name; }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+	public void setName(String name) { this.name = name; }
 
-	public String getAuthor() {
-		return author;
-	}
+	public String getAuthor() { return author; }
 
-	public void setAuthor(String author) {
-		this.author = author;
-	}
+	public void setAuthor(String author) { this.author = author; }
 
-	public BigDecimal getPrice() {
-		return price;
-	}
+	public BigDecimal getPrice() { return price; }
 
-	public void setPrice(BigDecimal price) {
-		this.price = price;
-	}
+	public void setPrice(BigDecimal price) { this.price = price; }
 
 }

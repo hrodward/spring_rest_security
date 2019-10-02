@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.ConstraintViolationException;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -48,6 +49,11 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
 		body.put("errors", errors);
 
 		return new ResponseEntity<>(body, headers, status);
+	}
+
+	@ExceptionHandler(ConstraintViolationException.class)
+	public void constraintViolationException(HttpServletResponse response) throws IOException {
+		response.sendError(HttpStatus.BAD_REQUEST.value());
 	}
 
 }
