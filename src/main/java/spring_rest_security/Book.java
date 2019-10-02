@@ -19,6 +19,7 @@ public class Book {
 	@NotBlank(message = "Please provide a name")
 	private String name;
 
+	@Author
 	@NotBlank(message = "Please provide an author")
 	private String author;
 
