@@ -9,6 +9,6 @@ public class BookUnsupportedFieldPatchException extends RuntimeException {
 	private static final long serialVersionUID = 1L;
 
 	public BookUnsupportedFieldPatchException(Set<String> keys) {
-		super("Field " + keys.toString() + " update is not allowed.");
+		super("Field " + keys.toString() + " update is not allowed");
 	}
 }
