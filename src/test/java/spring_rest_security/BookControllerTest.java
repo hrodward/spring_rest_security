@@ -37,11 +37,6 @@ public class BookControllerTest {
 	@MockBean(reset = MockReset.BEFORE)
 	private BookRepository mockRepository;
 
-	/*
-	 * { "timestamp":"2019-03-05T09:34:13.280+0000", "status":400,
-	 * "errors":["Author is not allowed.","Please provide a price"
-	 * ,"Please provide a author"] }
-	 */
 	@Test
 	public void save_emptyAuthor_emptyPrice_400() throws Exception {
 
@@ -63,10 +58,6 @@ public class BookControllerTest {
 		verify(mockRepository, times(0)).save(any(Book.class));
 	}
 
-	/*
-	 * { "timestamp":"2019-03-05T09:34:13.207+0000", "status":400,
-	 * "errors":["Author is not allowed."] }
-	 */
 	@Test
 	public void save_invalidAuthor_400() throws Exception {
 
