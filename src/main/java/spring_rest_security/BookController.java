@@ -3,6 +3,8 @@ package spring_rest_security;
 import java.util.List;
 import java.util.Map;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.StringUtils;
@@ -30,9 +32,9 @@ public class BookController {
 	}
 
 	// Save
-	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping("/books")
-	Book newBook(@RequestBody Book newBook) {
+	@ResponseStatus(HttpStatus.CREATED)
+	Book newBook(@Valid @RequestBody Book newBook) {
 		return repository.save(newBook);
 	}
 

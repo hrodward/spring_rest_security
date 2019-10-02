@@ -5,6 +5,9 @@ import java.math.BigDecimal;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Book {
@@ -12,8 +15,15 @@ public class Book {
 	@Id
 	@GeneratedValue
 	private Long id;
+	
+	@NotBlank(message = "Please provide a name")
 	private String name;
+	
+	@NotBlank(message = "Please provide an author")
 	private String author;
+	
+	@NotNull(message = "Please provide a price")
+	@DecimalMin(value = "0.01")
 	private BigDecimal price;
 
 	public Book() {
