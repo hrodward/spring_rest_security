@@ -1,4 +1,4 @@
-package spring_rest_security;
+package com.edu;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;

@@ -1,4 +1,4 @@
-package spring_rest_security;
+package com.edu;
 
 import java.util.List;
 import java.util.Map;
@@ -19,6 +19,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.edu.error.BookNotFoundException;
+import com.edu.error.BookUnsupportedFieldPatchException;
 
 @RestController
 @Validated

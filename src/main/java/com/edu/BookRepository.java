@@ -1,4 +1,4 @@
-package spring_rest_security;
+package com.edu;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

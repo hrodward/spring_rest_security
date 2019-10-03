@@ -1,4 +1,4 @@
-package spring_rest_security;
+package com.edu;
 
 import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.hasSize;

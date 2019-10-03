@@ -1,4 +1,4 @@
-package spring_rest_security;
+package com.edu.error;
 
 import java.util.Set;
 
