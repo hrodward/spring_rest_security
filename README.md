@@ -3,4 +3,4 @@
 Implements the following tutorials:
 - DONE https://www.mkyong.com/spring-boot/spring-rest-hello-world-example/
 - DONE https://www.mkyong.com/spring-boot/spring-rest-validation-example/
-- TODO https://www.mkyong.com/spring-boot/spring-rest-spring-security-example/
+- DONE https://www.mkyong.com/spring-boot/spring-rest-spring-security-example/
