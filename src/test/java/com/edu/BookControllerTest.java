@@ -7,11 +7,17 @@ import static org.hamcrest.Matchers.notNullValue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.math.BigDecimal;
+import java.util.Optional;
+
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +27,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.mock.mockito.MockReset;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -37,7 +44,14 @@ public class BookControllerTest {
 	@MockBean(reset = MockReset.BEFORE)
 	private BookRepository mockRepository;
 
+	@Before
+	public void init() {
+		Book book = new Book(1L, "A Guide to the Bodhisattva Way of Life", "Santideva", new BigDecimal("15.41"));
+		when(mockRepository.findById(1L)).thenReturn(Optional.of(book));
+	}
+
 	@Test
+	@WithMockUser(username = "admin", password = "password", roles = { "ADMIN", "USER" })
 	public void save_emptyAuthor_emptyPrice_400() throws Exception {
 
 		String bookInJson = "{\"name\":\"ABC\"}";
@@ -59,6 +73,7 @@ public class BookControllerTest {
 	}
 
 	@Test
+	@WithMockUser(username = "admin", password = "password", roles = { "ADMIN", "USER" })
 	public void save_invalidAuthor_400() throws Exception {
 
 		String bookInJson = "{\"name\":\" Spring REST tutorials\", \"author\":\"abc\",\"price\":\"9.99\"}";
@@ -76,5 +91,12 @@ public class BookControllerTest {
 
 		verify(mockRepository, times(0)).save(any(Book.class));
 
+	}
+
+	@Test
+	public void find_nologin_401() throws Exception {
+		mockMvc.perform(get("/books/1"))
+				.andDo(print())
+				.andExpect(status().isUnauthorized());
 	}
 }

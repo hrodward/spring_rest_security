@@ -38,6 +38,11 @@ public class Book {
 		this.price = price;
 	}
 
+	public Book(long id, String name, String author, BigDecimal price) {
+		this(name, author, price);
+		this.id = id;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

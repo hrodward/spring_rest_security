@@ -10,6 +10,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.mock.mockito.MockReset;
@@ -20,6 +21,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -45,6 +47,7 @@ public class BookControllerRestTemplateTest {
 		HttpEntity<String> entity = new HttpEntity<>(bookInJson, headers);
 
 		// send json with POST
+		restTemplate = restTemplate.withBasicAuth("admin", "password");
 		ResponseEntity<String> response = restTemplate.postForEntity("/books", entity, String.class);
 
 		String expectedJson = "{\"status\":400,\"errors\":[\"Author is not allowed\",\"Please provide a price\",\"Please provide an author\"]}";
@@ -65,6 +68,7 @@ public class BookControllerRestTemplateTest {
 		HttpEntity<String> entity = new HttpEntity<>(bookInJson, headers);
 
 		// Try exchange
+		restTemplate = restTemplate.withBasicAuth("admin", "password");
 		ResponseEntity<String> response = restTemplate.exchange("/books", HttpMethod.POST, entity, String.class);
 
 		String expectedJson = "{\"status\":400,\"errors\":[\"Author is not allowed\"]}";
